@@ -31,20 +31,9 @@ LLM Wiki 平台共用的 **Claude Code skills**，獨立成 repo 讓任何專案
 - **企業 allow-list**（給 IT）：在 managed settings 用 regex 允許內網 GitLab host，全公司即可安裝。
   參考官方「Manage plugins for your organization」。
 
-## 怎麼用（替代方式）
+### 替代：直接複製（離線、不想用 plugin 時）
 
-### git submodule（本平台 llm-wiki-mcp 用這個）
-
-把整個 repo 掛在專案的 `.claude/skills/`，Claude Code 自動載入裡面的 skill：
-
-```bash
-git submodule add <repo-url> .claude/skills
-git submodule update --remote .claude/skills && git commit -am "chore: bump skills"
-```
-
-### 直接複製
-
-把需要的 skill 資料夾（含 `scripts/`）複製進專案 `.claude/skills/<name>/`。
+把需要的 skill 資料夾（含 `scripts/`）複製進專案的 `.claude/skills/<name>/`，Claude Code 會自動載入。
 
 ## 寫新 skill
 
@@ -55,5 +44,5 @@ git submodule update --remote .claude/skills && git commit -am "chore: bump skil
 
 - **自包含**：每個 skill 一份 `SKILL.md` 讀完即可執行，不互相指來指去；工具放 `scripts/`（純 stdlib、無相依）。
 - **通用**：不綁特定框架/語言/領域；新舊專案皆可。
-- **雙用途 layout**：skill 目錄放在 repo root（供 submodule 掛 `.claude/skills`），同時用
-  `.claude-plugin/marketplace.json` 的 `skills` 自訂路徑指向它們 → plugin 安裝與 submodule 並存，零衝突。
+- **安裝靠 plugin**：`.claude-plugin/marketplace.json` 把每個 skill 列為可安裝 plugin；skill 目錄放
+  repo root，由 `skills` 自訂路徑指向。

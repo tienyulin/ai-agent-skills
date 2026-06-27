@@ -13,8 +13,8 @@
 └── assets/           # 選填：範本/資源
 ```
 
-- skill 目錄放在 **repo root**（不是 `skills/` 子目錄）—— 這樣同時供平台 `.claude/skills` submodule 掛載
-  與 plugin 安裝（`marketplace.json` 的 `skills` 用自訂路徑指 root）。
+- skill 目錄放在 **repo root**（不是 `skills/` 子目錄）—— `marketplace.json` 的 `skills` 用自訂路徑
+  指向它們，安裝走 plugin（見 §5）。
 
 ## 2. SKILL.md frontmatter（官方欄位）
 
