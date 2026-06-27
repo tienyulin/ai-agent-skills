@@ -53,14 +53,11 @@ plugin `llm-wiki-skills` 的 `skills`：
 
 ## Step 5 — 驗證
 ```bash
-# 1) 官方驗證器（frontmatter + 命名）
-skills-ref validate ./<name>            # github.com/agentskills/agentskills
+# 1) 離線驗證器（純 stdlib、無外連）— frontmatter/命名/marketplace 註冊一起檢查
+python skill-author/scripts/validate_skill.py <name>      # 或不帶參數驗全部
+#   （官方 skills-ref 是 pip 套件、需外網，內網不適用；上面這支不需要。）
 
-# 2) marketplace.json 合法 + 每個 skill 路徑有 SKILL.md
-python3 -c "import json,os; m=json.load(open('.claude-plugin/marketplace.json')); \
-  [print(s, os.path.exists(s+'/SKILL.md')) for p in m['plugins'] for s in p.get('skills',[])]"
-
-# 3) 本地安裝實測（測完移除，別污染設定）
+# 2) 本地安裝實測（測完移除，別污染設定）
 claude plugin marketplace add "$PWD"
 claude plugin install <name>@llm-wiki-skills
 claude plugin list | grep <name>          # 應 enabled

@@ -69,18 +69,16 @@
 ## 6. 驗證（提交前）
 
 ```bash
-# 官方驗證器（frontmatter + 命名）
-skills-ref validate ./<skill-name>            # https://github.com/agentskills/agentskills
-
-# marketplace.json 合法 + skill 路徑存在
-python3 -c "import json,os; m=json.load(open('.claude-plugin/marketplace.json')); \
-  [print(s, os.path.exists(s+'/SKILL.md')) for p in m['plugins'] for s in p.get('skills',[])]"
+# 離線驗證器（純 stdlib、無外連）— frontmatter/命名/marketplace 註冊
+python skill-author/scripts/validate_skill.py            # 驗全部，或帶 <skill-name> 驗單一
 
 # 本地安裝實測（測完移除，別污染設定）
-claude plugin marketplace add \"$PWD\"
+claude plugin marketplace add "$PWD"
 claude plugin install <skill-name>@llm-wiki-skills
 claude plugin marketplace remove llm-wiki-skills
 ```
+> 官方 `skills-ref`（<https://github.com/agentskills/agentskills>）是 pip 套件、需外網安裝，**內網不適用**；
+> 上面這支自帶驗證器涵蓋同樣檢查、零相依。本檔的規則都已內聯，不需要連 agentskills.io 也能照做。
 
 ## Checklist（新 skill）
 - [ ] 目錄名 = `name` = kebab-case
