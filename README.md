@@ -46,6 +46,11 @@ git submodule update --remote .claude/skills && git commit -am "chore: bump skil
 
 把需要的 skill 資料夾（含 `scripts/`）複製進專案 `.claude/skills/<name>/`。
 
+## 寫新 skill
+
+照 [`CONTRIBUTING.md`](CONTRIBUTING.md) 的統一標準（官方 Agent Skills spec + 本 repo 慣例）。
+從 [`template/`](template/) 複製起手，填完加進 `.claude-plugin/marketplace.json`。
+
 ## 設計原則
 
 - **自包含**：每個 skill 一份 `SKILL.md` 讀完即可執行，不互相指來指去；工具放 `scripts/`（純 stdlib、無相依）。
